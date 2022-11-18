@@ -1,0 +1,14 @@
+<div class="level level-2">
+  <div class="level-subtitle">
+    <i>Squad - {{ squad?.description }}</i>
+  </div>
+
+  <app-product-manager
+    [productManager]="squad?.productManager"
+  ></app-product-manager>
+  
+  <app-development
+    *ngFor="let development of squad?.developments"
+    [development]="development"
+  ></app-development>
+</div>

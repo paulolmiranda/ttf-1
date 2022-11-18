@@ -1,0 +1,50 @@
+<div class="level level-4" contextConsumer>
+  <form [formGroup]="messageForm" #form="ngForm" (submit)="onSend(form)">
+    <div class="tools">
+      <div class="tools-to">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Para</mat-label>
+          <input matInput maxlength="50" title="Para" formControlName="to" />
+          <mat-error *ngIf="messageForm.get('to')?.invalid">
+            <ng-container *ngIf="messageForm.get('to')?.hasError('required')"
+              >Campo obrigatório</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="tools-message">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Message</mat-label>
+          <input
+            matInput
+            #message
+            maxlength="256"
+            title="Message"
+            formControlName="message"
+            placeholder="Ex. I need help with..."
+          />
+          <mat-hint align="end">{{ message.value.length }} / 256</mat-hint>
+          <mat-error *ngIf="messageForm.get('message')?.invalid">
+            <ng-container
+              *ngIf="messageForm.get('message')?.hasError('required')"
+              >Campo obrigatório</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="tools-send">
+        <button type="submit" mat-icon-button color="primary" title="Send">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="messages">
+      <div class="level level-5" *ngFor="let message of messages">
+        <code>{{ message | json }}</code>
+      </div>
+    </div>
+  </form>
+</div>

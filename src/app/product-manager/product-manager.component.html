@@ -1,0 +1,15 @@
+<div class="level level-3" contextConsumer>
+  <div class="level-subtitle">
+    <button
+      mat-button
+      title="Code Code"
+      (click)="onCopy()"
+      class="level-subtitle-clip"
+      [matBadge]="countMessage"
+    >
+      PM - {{ productManager?.name }}
+    </button>
+  </div>
+
+  <app-message [sender]="productManager"></app-message>
+</div>

@@ -1,0 +1,29 @@
+.w-100 {
+  width: 100%;
+}
+
+.tools {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+
+  &-to {
+    margin-right: 1rem;
+    width: 21%;
+  }
+
+  &-message {
+    margin-right: 1rem;
+    width: 79%;
+  }
+
+  &-send {
+    width: 3%;
+  }
+}
+
+.messages {
+    code {
+        font-weight: lighter;
+    }
+}

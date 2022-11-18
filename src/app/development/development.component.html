@@ -1,0 +1,15 @@
+<div class="level level-3" contextConsumer>
+  <div class="level-subtitle">
+    <button
+      mat-button
+      title="Copy Code"
+      (click)="onCopy()"
+      class="level-subtitle-clip"
+      [matBadge]="countMessage" 
+    >
+      DEV - {{ development?.name }}
+    </button>
+  </div>
+
+  <app-message [sender]="development"></app-message>
+</div>
