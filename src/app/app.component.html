@@ -1,4 +1,28 @@
-<div class="level level-1" contextProvider>
+<div class="level level-1" contextProvider [provide]="{ connect }">
+  <div class="text-end">
+    <button
+      type="button"
+      mat-icon-button
+      color="primary"
+      title="Conectar"
+      [disabled]="connect"
+      (click)="onConnect()"
+    >
+      <mat-icon>wifi</mat-icon>
+    </button>
+
+    <button
+      type="button"
+      mat-icon-button
+      color="warn"
+      title="Desconectar"
+      [disabled]="!connect"
+      (click)="onDisconnect()"
+    >
+      <mat-icon>wifi_off</mat-icon>
+    </button>
+  </div>
+
   <div *ngFor="let squad of squads">
     <app-squad [squad]="squad"></app-squad>
   </div>

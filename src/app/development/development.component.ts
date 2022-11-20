@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { map, Subject, takeUntil } from 'rxjs';
 
+import { ContextProvider } from '../context';
 import { Development, Message } from '../app.component';
-import { ContextProvider } from '../context/context-provider/context-provider.component';
 
 @Component({
   selector: 'app-development',

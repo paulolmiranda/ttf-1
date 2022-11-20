@@ -1,4 +1,4 @@
-<div class="level level-4" contextConsumer>
+<div class="level level-4" contextConsumer [consume]="['connect']">
   <form [formGroup]="messageForm" #form="ngForm" (submit)="onSend(form)">
     <div class="tools">
       <div class="tools-to">
@@ -35,7 +35,7 @@
       </div>
 
       <div class="tools-send">
-        <button type="submit" mat-icon-button color="primary" title="Send">
+        <button type="submit" mat-icon-button color="primary" title="Send" [disabled]="!connect">
           <mat-icon>send</mat-icon>
         </button>
       </div>

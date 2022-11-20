@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { v4 as uuid } from 'uuid';
 
+import { ContextProvider } from './context';
+
 export type Sender = Development | ProductManager;
 
 export interface Message {
@@ -32,13 +34,34 @@ export interface Squad {
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  protected connect = true;
+
   protected readonly squads: Array<Squad>;
+
+  private contextProvider?: ContextProvider;
 
   constructor() {
     this.squads = [];
   }
 
   ngOnInit(): void {
+    // SOLUCTION DISTINCT BY PROPERTIES.
+    this.contextProvider
+      ?.select((context: any) => context.message, {
+        distinctProperties: ['message'],
+      })
+      .subscribe((data: Message) => {
+        console.log('distinct by messag', data);
+      });
+
+    this.contextProvider
+      ?.select((context: any) => context.message, {
+        distinctProperties: ['message', 'to'],
+      })
+      .subscribe((data: Message) => {
+        console.log('distinct by messag and to', data);
+      });
+
     this.squads.push({
       id: uuid(),
       description: 'Supremos',
@@ -118,5 +141,13 @@ export class AppComponent implements OnInit {
         },
       ],
     });
+  }
+
+  public onConnect(): void {
+    this.connect = true;
+  }
+
+  public onDisconnect(): void {
+    this.connect = false;
   }
 }
