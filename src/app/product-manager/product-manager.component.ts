@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { map, Subject, takeUntil } from 'rxjs';
 
+import { ContextProvider } from '../context';
 import { Message, ProductManager } from '../app.component';
-import { ContextProvider } from '../context/context-provider/context-provider.component';
 
 @Component({
   selector: 'app-product-manager',

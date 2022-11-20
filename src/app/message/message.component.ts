@@ -1,15 +1,15 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   Validators,
-  AbstractControl,
   UntypedFormGroup,
   UntypedFormBuilder,
   FormGroupDirective,
 } from '@angular/forms';
 import { map, Subject, takeUntil } from 'rxjs';
 
+import * as AppAction from '../app.actions';
+import { ContextProvider } from '../context';
 import { Sender, Message } from '../app.component';
-import { ContextProvider } from '../context/context-provider/context-provider.component';
 
 @Component({
   selector: 'app-message',
@@ -17,6 +17,8 @@ import { ContextProvider } from '../context/context-provider/context-provider.co
   styleUrls: ['./message.component.scss'],
 })
 export class MessageComponent implements OnInit, OnDestroy {
+  protected connect?: boolean;
+
   protected messages: Message[] = [];
 
   protected messageForm: UntypedFormGroup;
@@ -55,18 +57,16 @@ export class MessageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const { messages = [] } = this.contextProvider?.value();
+    const message = {
+      sender: this.sender,
+      at: new Date(),
+      ...value,
+    }
 
-    const data = [
-      ...messages,
-      {
-        sender: this.sender,
-        at: new Date(),
-        ...value,
-      },
-    ];
+    this.contextProvider?.dispatch(AppAction.addMessage(message));
+    this.contextProvider?.dispatch({ key: 'message', value: message });
+    this.contextProvider?.dispatch({ key: 'sender', value: this.sender });
 
-    this.contextProvider?.dispatch('messages', data);
     form.resetForm();
   }
 
